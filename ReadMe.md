@@ -64,14 +64,6 @@ matplotlib
 Installation
 Clone the repository:
 
-bash
-Copy code
-git clone https://github.com/your-repo/Bank-Marketing-Classifier.git
-cd Bank-Marketing-Classifier
-Install the required libraries:
-
-Copy code
-pip install -r requirements.txt
 Launch the Jupyter Notebook:
 
 Copy code
