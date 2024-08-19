@@ -154,17 +154,50 @@ print("Decision Tree:", best_decision_tree.get_params())
 print("Support Vector Machine:", best_svm.get_params())
 # Adjust performance metric
 # Instead of using ROC-AUC, let's use F1-Score as the performance metric
+# Fit the models with the best hyperparameters
+best_knn.fit(X_train, y_train)
+best_log_reg.fit(X_train, y_train)
+best_decision_tree.fit(X_train, y_train)
+best_svm.fit(X_train, y_train)  # Uncomment this line if you want to fit the SVM model
+
+# Evaluate the models with the adjusted performance metric
 results = {}
-for name, clf in classifiers.items():
-    clf.fit(X_train, y_train)
-    y_pred = clf.predict(X_test)
-    
-    results[name] = {
-        "Accuracy": accuracy_score(y_test, y_pred),
-        "Precision": precision_score(y_test, y_pred),
-        "Recall": recall_score(y_test, y_pred),
-        "F1-Score": f1_score(y_test, y_pred)
-    }
+
+# K-Nearest Neighbors
+y_pred_knn = best_knn.predict(X_test)
+results["K-Nearest Neighbors"] = {
+    "Accuracy": accuracy_score(y_test, y_pred_knn),
+    "Precision": precision_score(y_test, y_pred_knn),
+    "Recall": recall_score(y_test, y_pred_knn),
+    "F1-Score": f1_score(y_test, y_pred_knn)
+}
+
+# Logistic Regression
+y_pred_log_reg = best_log_reg.predict(X_test)
+results["Logistic Regression"] = {
+    "Accuracy": accuracy_score(y_test, y_pred_log_reg),
+    "Precision": precision_score(y_test, y_pred_log_reg),
+    "Recall": recall_score(y_test, y_pred_log_reg),
+    "F1-Score": f1_score(y_test, y_pred_log_reg)
+}
+
+# Decision Tree
+y_pred_decision_tree = best_decision_tree.predict(X_test)
+results["Decision Tree"] = {
+    "Accuracy": accuracy_score(y_test, y_pred_decision_tree),
+    "Precision": precision_score(y_test, y_pred_decision_tree),
+    "Recall": recall_score(y_test, y_pred_decision_tree),
+    "F1-Score": f1_score(y_test, y_pred_decision_tree)
+}
+
+# Support Vector Machine
+y_pred_svm = best_svm.predict(X_test)
+results["Support Vector Machine"] = {
+    "Accuracy": accuracy_score(y_test, y_pred_svm),
+    "Precision": precision_score(y_test, y_pred_svm),
+    "Recall": recall_score(y_test, y_pred_svm),
+    "F1-Score": f1_score(y_test, y_pred_svm)
+}
 
 # Display the results
 results_df = pd.DataFrame(results).T
